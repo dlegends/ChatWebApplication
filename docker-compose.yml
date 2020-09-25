@@ -1,0 +1,58 @@
+version: "3"
+services:
+    chat_spring_server:
+        build:
+            context: chat-app-backend
+            dockerfile: Dockerfile
+        ports:
+            - "8080:8080"
+        restart: always
+        depends_on:
+            - mysqldb
+        environment:
+                SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/test_db?serverTimezone=UTC
+                SPRING_DATASOURCE_USERNAME: your_username
+                SPRING_DATASOURCE_PASSWORD: your_password
+        networks:
+            - backend
+            - frontend
+
+    chat_react_client:
+        build:
+            context: chat-app-frontend
+            dockerfile: Dockerfile
+            args:
+                HTTP_SERVER_URL: http://127.0.0.1:8080
+                WS_SERVER_URL: ws://127.0.0.1:8080/ws
+        ports:
+            - "80:80"
+        restart: always
+        depends_on:
+            - chat_spring_server
+        networks:
+            - frontend
+
+    mysqldb:
+        # container_name: test_database
+        image: mysql:5.7.30
+        environment:
+          MYSQL_DATABASE: test_db
+          MYSQL_ROOT_PASSWORD: your_password
+          MYSQL_USER: your_user
+          MYSQL_PASSWORD: your_password
+          MYSQL_ROOT_HOST: '%'
+        ports:
+          - "3306:3306"
+        volumes:
+          - db-data:/var/lib/mysql
+        networks:
+          - backend
+
+# Volumes
+volumes:
+  db-data:
+
+# Networks to be created where each container will belong
+networks:
+  backend:
+  frontend:

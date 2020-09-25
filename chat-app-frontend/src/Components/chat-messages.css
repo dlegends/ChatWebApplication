@@ -1,0 +1,52 @@
+.sending-username {
+  color: #31303031;
+  font-size: 15px;
+  align-self: flex-end;
+  margin-right: 3px;
+}
+
+.receiving-username {
+  color: #31303031;
+  font-size: 15px;
+  align-self: flex-start;
+  margin-left: 3px;
+}
+
+.receiving {
+  align-self: flex-start;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+}
+
+.receiving-message {
+  background-color: #6FF1FA;
+  align-self: flex-start;
+  
+}
+
+.message {
+  border-radius: 25px;
+  text-align: center;
+  width: fit-content;
+  font-size: 20px;
+  padding-right: 10px;
+  padding-left: 10px;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+.sending {
+  align-self: flex-end;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 50%;
+}
+
+.sending-message {
+  background-color: #6EFFA2;
+  align-self: flex-end;
+}
